@@ -13,6 +13,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/swagger"
 
+	"housing-api/api/routes"
 	"housing-api/internal/config"
 	"housing-api/internal/middleware/logging"
 	"housing-api/pkg/logger"
@@ -73,6 +74,9 @@ func Run() error {
 			},
 		})
 	})
+
+	// Setup routes
+	routes.Setup(app, cfg)
 
 	// Start server
 	go func() {
