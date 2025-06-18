@@ -59,6 +59,9 @@ func Run() error {
 	}))
 	app.Use(logging.RequestLogger())
 
+	// Swagger documentation
+	app.Get("/swagger/*", swagger.HandlerDefault)
+
 	// Health check endpoint
 	app.Get("/health", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{
@@ -79,6 +82,7 @@ func Run() error {
 	}()
 
 	log.Printf("🚀 Server started on port %s", cfg.Port)
+	log.Printf("📚 Swagger documentation available at http://localhost:%s/swagger/", cfg.Port)
 
 	// Wait for interrupt signal to gracefully shutdown the server
 	quit := make(chan os.Signal, 1)
