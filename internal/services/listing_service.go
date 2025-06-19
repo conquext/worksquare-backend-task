@@ -27,7 +27,6 @@ func NewListingService() (*ListingService, error) {
 
 // GetListings returns paginated listings with optional filtering
 func (s *ListingService) GetListings(filter models.ListingFilter, paginationQuery models.PaginationQuery) (*models.PaginatedResponse, error) {
-	// Set pagination defaults
 	paginationQuery.SetDefaults()
 
 	// Get paginated listings
@@ -139,8 +138,6 @@ func (s *ListingService) GetFiltersMetadata() (map[string]interface{}, error) {
 
 // SearchListings provides advanced search functionality
 func (s *ListingService) SearchListings(query string, filter models.ListingFilter, paginationQuery models.PaginationQuery) (*models.PaginatedResponse, error) {
-	// If query is provided, add it to location filter for now
-	// In a real implementation, you might want to search across multiple fields
 	if query != "" && filter.Location == "" {
 		filter.Location = query
 	}

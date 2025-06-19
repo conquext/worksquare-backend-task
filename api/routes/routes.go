@@ -38,6 +38,12 @@ func Setup(app *fiber.App, cfg *config.Config) {
 	// Listing routes (public)
 	listingRoutes := api.Group("/listings")
 	listingRoutes.Get("/", listingController.GetListings)
+	listingRoutes.Get("/search", listingController.SearchListings)
+	listingRoutes.Get("/filters", listingController.GetFiltersMetadata)
+	listingRoutes.Get("/:id", listingController.GetListingByID)
+
+	// Protected listing routes
+	listingRoutes.Get("/stats", auth.JWTMiddleware(cfg), listingController.GetListingStats)
 
 	// Demo endpoints
 	demoRoutes := api.Group("/demo")
