@@ -1,0 +1,401 @@
+[{
+        "id": 1,
+        "price": "₦2,500,000",
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "location": "Lekki, Lagos",
+        "title": "Brand New 4 Bedroom Fully Detached Duplex With BQ",
+        "status": ["House", "For Rent"],
+        "image": "property1.jpg"
+    },
+    {
+        "id": 2,
+        "price": "₦3,800,000",
+        "bedrooms": 5,
+        "bathrooms": 5,
+        "location": "Gwarinpa, Abuja",
+        "title": "Luxury 5 Bedroom Duplex with Pool",
+        "status": ["House", "For Rent"],
+        "image": "property2.jpg"
+    },
+    {
+        "id": 3,
+        "price": "₦1,200,000",
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "location": "Ikeja, Lagos",
+        "title": "3 Bedroom Flat with Modern Finishing",
+        "status": ["Flat", "For Rent"],
+        "image": "property3.jpg"
+    },
+    {
+        "id": 4,
+        "price": "₦2,000,000",
+        "bedrooms": 4,
+        "bathrooms": 3,
+        "location": "Maitama, Abuja",
+        "title": "Spacious 4 Bedroom Terrace in Secure Estate",
+        "status": ["Terrace", "For Rent"],
+        "image": "property4.jpg"
+    },
+    {
+        "id": 5,
+        "price": "₦4,500,000",
+        "bedrooms": 6,
+        "bathrooms": 5,
+        "location": "Lekki Phase 1, Lagos",
+        "title": "Massive 6 Bedroom Mansion with 2 Living Rooms",
+        "status": ["House", "For Lease"],
+        "image": "property5.jpg"
+    },
+    {
+        "id": 6,
+        "price": "₦1,000,000",
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "location": "Abeokuta, Ogun",
+        "title": "Affordable 2 Bedroom Bungalow in Gated Estate",
+        "status": ["House", "For Rent"],
+        "image": "property6.jpg"
+    },
+    {
+        "id": 7,
+        "price": "₦3,200,000",
+        "bedrooms": 5,
+        "bathrooms": 4,
+        "location": "Asokoro, Abuja",
+        "title": "Fully Serviced 5 Bedroom Duplex",
+        "status": ["House", "For Rent"],
+        "image": "property7.jpg"
+    },
+    {
+        "id": 8,
+        "price": "₦850,000",
+        "bedrooms": 1,
+        "bathrooms": 1,
+        "location": "Surulere, Lagos",
+        "title": "One Bedroom Apartment for Single Professionals",
+        "status": ["Flat", "For Rent"],
+        "image": "property8.jpg"
+    },
+    {
+        "id": 9,
+        "price": "₦2,800,000",
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "location": "Wuse 2, Abuja",
+        "title": "Elegant 4 Bedroom Terrace in Central Abuja",
+        "status": ["Terrace", "For Lease"],
+        "image": "property9.jpg"
+    },
+    {
+        "id": 10,
+        "price": "₦1,700,000",
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "location": "Magodo, Lagos",
+        "title": "3 Bedroom Apartment with Ample Parking",
+        "status": ["Flat", "For Rent"],
+        "image": "property10.jpg"
+    },
+    {
+        "id": 11,
+        "price": "₦3,500,000",
+        "bedrooms": 5,
+        "bathrooms": 4,
+        "location": "Ikoyi, Lagos",
+        "title": "High-End 5 Bedroom Penthouse with Ocean View",
+        "status": ["Penthouse", "For Lease"],
+        "image": "property11.jpg"
+    },
+    {
+        "id": 12,
+        "price": "₦2,000,000",
+        "bedrooms": 4,
+        "bathrooms": 3,
+        "location": "Yaba, Lagos",
+        "title": "Newly Renovated 4 Bedroom Duplex",
+        "status": ["House", "For Rent"],
+        "image": "property12.jpg"
+    },
+    {
+        "id": 13,
+        "price": "₦2,900,000",
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "location": "Lugbe, Abuja",
+        "title": "Spacious Duplex with Modern Kitchen",
+        "status": ["Duplex", "For Rent"],
+        "image": "property13.jpg"
+    },
+    {
+        "id": 14,
+        "price": "₦1,300,000",
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "location": "Ogudu, Lagos",
+        "title": "3 Bedroom Unit in a Gated Community",
+        "status": ["Flat", "For Rent"],
+        "image": "property14.jpg"
+    },
+    {
+        "id": 15,
+        "price": "₦5,000,000",
+        "bedrooms": 6,
+        "bathrooms": 5,
+        "location": "Banana Island, Lagos",
+        "title": "Ultra-Modern Mansion with Elevator & Cinema",
+        "status": ["House", "For Lease"],
+        "image": "property15.jpg"
+    },
+    {
+        "id": 16,
+        "price": "₦1,000,000",
+        "bedrooms": 2,
+        "bathrooms": 1,
+        "location": "Apapa, Lagos",
+        "title": "Budget Friendly 2 Bedroom Flat",
+        "status": ["Flat", "For Rent"],
+        "image": "property16.jpg"
+    },
+    {
+        "id": 17,
+        "price": "₦2,300,000",
+        "bedrooms": 4,
+        "bathrooms": 3,
+        "location": "Utako, Abuja",
+        "title": "Executive 4 Bedroom Duplex with BQ",
+        "status": ["Duplex", "For Rent"],
+        "image": "property17.jpg"
+    },
+    {
+        "id": 18,
+        "price": "₦2,600,000",
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "location": "Lekki, Lagos",
+        "title": "Fully Furnished 4 Bedroom Short Let",
+        "status": ["Short Let", "For Rent"],
+        "image": "property18.jpg"
+    },
+    {
+        "id": 19,
+        "price": "₦3,000,000",
+        "bedrooms": 4,
+        "bathrooms": 3,
+        "location": "Jahi, Abuja",
+        "title": "Brand New 4 Bedroom Semi Detached",
+        "status": ["House", "For Lease"],
+        "image": "property19.jpg"
+    },
+    {
+        "id": 20,
+        "price": "₦1,500,000",
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "location": "Ojodu Berger, Lagos",
+        "title": "Affordable 3 Bedroom Apartment",
+        "status": ["Flat", "For Rent"],
+        "image": "property20.jpg"
+    },
+    {
+        "id": 21,
+        "title": "Brand New 4 Bedroom Fully Detached Duplex With BQ",
+        "price": "2,500,000",
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "location": "Lekki, Lagos",
+        "status": ["House", "For Rent"],
+        "image": "property1.jpg"
+    },
+    {
+        "id": 22,
+        "title": "Modern 3 Bedroom Terrace With Smart Features",
+        "price": "1,800,000",
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "location": "Gwarinpa, Abuja",
+        "status": ["House", "For Rent"],
+        "image": "property2.jpg"
+    },
+    {
+        "id": 23,
+        "title": "Luxury 5 Bedroom Duplex with Pool & Cinema",
+        "price": "5,500,000",
+        "bedrooms": 5,
+        "bathrooms": 6,
+        "location": "Maitama, Abuja",
+        "status": ["House", "For Rent"],
+        "image": "property3.jpg"
+    },
+    {
+        "id": 24,
+        "title": "Elegant 2 Bedroom Apartment in Secure Estate",
+        "price": "950,000",
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "location": "Ikeja, Lagos",
+        "status": ["Apartment", "For Rent"],
+        "image": "property4.jpg"
+    },
+    {
+        "id": 25,
+        "title": "4 Bedroom Semi Detached with BQ",
+        "price": "2,000,000",
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "location": "Ajah, Lagos",
+        "status": ["House", "For Rent"],
+        "image": "property5.jpg"
+    },
+    {
+        "id": 26,
+        "title": "Smart 1 Bedroom Studio Apartment",
+        "price": "600,000",
+        "bedrooms": 1,
+        "bathrooms": 1,
+        "location": "Yaba, Lagos",
+        "status": ["Apartment", "For Rent"],
+        "image": "property6.jpg"
+    },
+    {
+        "id": 27,
+        "title": "Newly Built 3 Bedroom Flat",
+        "price": "1,300,000",
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "location": "Abule Egba, Lagos",
+        "status": ["Flat", "For Rent"],
+        "image": "property7.jpg"
+    },
+    {
+        "id": 28,
+        "title": "Furnished 2 Bedroom Shortlet Apartment",
+        "price": "200,000 / week",
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "location": "Wuse 2, Abuja",
+        "status": ["Apartment", "Shortlet"],
+        "image": "property8.jpg"
+    },
+    {
+        "id": 29,
+        "title": "5 Bedroom Duplex with Parking Space",
+        "price": "3,000,000",
+        "bedrooms": 5,
+        "bathrooms": 5,
+        "location": "Asokoro, Abuja",
+        "status": ["House", "For Rent"],
+        "image": "property9.jpg"
+    },
+    {
+        "id": 30,
+        "title": "3 Bedroom Apartment in Gated Estate",
+        "price": "1,700,000",
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "location": "Chevron, Lekki",
+        "status": ["Flat", "For Rent"],
+        "image": "property10.jpg"
+    },
+    {
+        "id": 31,
+        "title": "Newly Renovated 2 Bedroom Apartment",
+        "price": "1,000,000",
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "location": "Gbagada, Lagos",
+        "status": ["Apartment", "For Rent"],
+        "image": "property11.jpg"
+    },
+    {
+        "id": 32,
+        "title": "Fully Furnished 1 Bedroom Apartment",
+        "price": "750,000",
+        "bedrooms": 1,
+        "bathrooms": 1,
+        "location": "Ilupeju, Lagos",
+        "status": ["Apartment", "For Rent"],
+        "image": "property12.jpg"
+    },
+    {
+        "id": 33,
+        "title": "Brand New 4 Bedroom Duplex + BQ",
+        "price": "2,800,000",
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "location": "Osapa, Lekki",
+        "status": ["House", "For Rent"],
+        "image": "property13.jpg"
+    },
+    {
+        "id": 34,
+        "title": "4 Bedroom Terrace + BQ in Gated Estate",
+        "price": "2,400,000",
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "location": "Life Camp, Abuja",
+        "status": ["Terrace", "For Rent"],
+        "image": "property14.jpg"
+    },
+    {
+        "id": 35,
+        "title": "3 Bedroom Penthouse Apartment",
+        "price": "3,200,000",
+        "bedrooms": 3,
+        "bathrooms": 4,
+        "location": "Ikoyi, Lagos",
+        "status": ["Penthouse", "For Rent"],
+        "image": "property15.jpg"
+    },
+    {
+        "id": 36,
+        "title": "Serviced Studio Apartment with Gym",
+        "price": "850,000",
+        "bedrooms": 1,
+        "bathrooms": 1,
+        "location": "Katampe, Abuja",
+        "status": ["Apartment", "For Rent"],
+        "image": "property16.jpg"
+    },
+    {
+        "id": 37,
+        "title": "Furnished 4 Bedroom Duplex + BQ",
+        "price": "3,500,000",
+        "bedrooms": 4,
+        "bathrooms": 5,
+        "location": "Lekki Phase 1, Lagos",
+        "status": ["House", "For Rent"],
+        "image": "property17.jpg"
+    },
+    {
+        "id": 38,
+        "title": "Luxury 1 Bedroom Apartment – Shortlet",
+        "price": "150,000 / night",
+        "bedrooms": 1,
+        "bathrooms": 1,
+        "location": "Victoria Island, Lagos",
+        "status": ["Apartment", "Shortlet"],
+        "image": "property18.jpg"
+    },
+    {
+        "id": 39,
+        "title": "Detached 5 Bedroom Mansion + Pool",
+        "price": "6,000,000",
+        "bedrooms": 5,
+        "bathrooms": 6,
+        "location": "Banana Island, Lagos",
+        "status": ["Mansion", "For Rent"],
+        "image": "property19.jpg"
+    },
+    {
+        "id": 40,
+        "title": "3 Bedroom Smart Apartment",
+        "price": "1,900,000",
+        "bedrooms": 3,
+        "bathrooms": 3,
+        "location": "Lokogoma, Abuja",
+        "status": ["Apartment", "For Rent"],
+        "image": "property20.jpg"
+    }
+]
