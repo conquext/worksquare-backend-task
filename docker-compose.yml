@@ -1,0 +1,22 @@
+services:
+  worksquare-api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - JWT_SECRET=super-secret-jwt-key-2025
+      - JWT_EXPIRES_IN=24h
+      - JWT_REFRESH_EXPIRES_IN=7d
+      - RATE_LIMIT_WINDOW_MS=3600000ms
+      - RATE_LIMIT_MAX_REQUESTS=100
+      - LOG_LEVEL=info
+      - API_VERSION=v1
+      - API_PREFIX=/api
+      - DEMO_USER_EMAIL=demo@worksquare.com
+      - DEMO_USER_PASSWORD=demo123456
+    volumes:
+      - ./data:/root/data
+      - ./logs:/root/logs
+    restart: unless-stopped

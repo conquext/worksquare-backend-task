@@ -1,0 +1,468 @@
+openapi: 3.0.0
+info:
+  title: Worksquare Housing Listings API
+  description: RESTful API for housing listings with JWT authentication, pagination, and filtering
+  version: 1.0.0
+  contact:
+    name: API Support
+    url: http://www.worksquare.com/support
+    email: support@worksquare.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:3000/api/v1
+    description: Development server
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Enter JWT token with Bearer prefix
+
+  schemas:
+    APIResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        data:
+          type: object
+        error:
+          $ref: "#/components/schemas/ErrorInfo"
+        meta:
+          $ref: "#/components/schemas/MetaInfo"
+
+    ErrorInfo:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
+
+    MetaInfo:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        total_pages:
+          type: integer
+
+    Listing:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "Brand New 4 Bedroom Fully Detached Duplex With BQ"
+        price:
+          type: string
+          example: "₦2,500,000"
+        bedrooms:
+          type: integer
+          example: 4
+        bathrooms:
+          type: integer
+          example: 4
+        location:
+          type: string
+          example: "Lekki, Lagos"
+        status:
+          type: array
+          items:
+            type: string
+          example: ["House", "For Rent"]
+        image:
+          type: string
+          example: "property1.jpg"
+
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: "demo@worksquare.com"
+        password:
+          type: string
+          minLength: 6
+          example: "demo123456"
+
+    RegisterRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: "newuser@example.com"
+        password:
+          type: string
+          minLength: 6
+          example: "securepassword"
+
+    AuthResponse:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/UserResponse"
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        expires_in:
+          type: integer
+
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      description: Check if the API is running
+      tags:
+        - Health
+      responses:
+        "200":
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIResponse"
+
+  /demo/credentials:
+    get:
+      summary: Get demo credentials
+      description: Get demo user credentials for testing
+      tags:
+        - Demo
+      responses:
+        "200":
+          description: Demo credentials retrieved
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIResponse"
+
+  /auth/login:
+    post:
+      summary: User login
+      description: Authenticate user and return JWT tokens
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/APIResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+
+  /auth/register:
+    post:
+      summary: User registration
+      description: Register a new user and return JWT tokens
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "201":
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/APIResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: Bad request
+        "409":
+          description: User already exists
+
+  /auth/refresh:
+    post:
+      summary: Refresh access token
+      description: Generate new access token using refresh token
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refresh_token
+              properties:
+                refresh_token:
+                  type: string
+      responses:
+        "200":
+          description: Token refreshed successfully
+        "401":
+          description: Invalid refresh token
+
+  /auth/profile:
+    get:
+      summary: Get user profile
+      description: Get current user profile (protected route)
+      tags:
+        - Authentication
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Profile retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/APIResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/UserResponse"
+        "401":
+          description: Unauthorized
+
+  /auth/logout:
+    post:
+      summary: User logout
+      description: Logout user (client should discard tokens)
+      tags:
+        - Authentication
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Logout successful
+
+  /listings:
+    get:
+      summary: Get all listings
+      description: Get all housing listings with optional filtering and pagination
+      tags:
+        - Listings
+      parameters:
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          description: Items per page
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: location
+          in: query
+          description: Filter by location
+          required: false
+          schema:
+            type: string
+        - name: property_type
+          in: query
+          description: Filter by property type
+          required: false
+          schema:
+            type: string
+        - name: city
+          in: query
+          description: Filter by city
+          required: false
+          schema:
+            type: string
+        - name: min_price
+          in: query
+          description: Minimum price
+          required: false
+          schema:
+            type: integer
+        - name: max_price
+          in: query
+          description: Maximum price
+          required: false
+          schema:
+            type: integer
+        - name: min_bedrooms
+          in: query
+          description: Minimum bedrooms
+          required: false
+          schema:
+            type: integer
+        - name: max_bedrooms
+          in: query
+          description: Maximum bedrooms
+          required: false
+          schema:
+            type: integer
+        - name: min_bathrooms
+          in: query
+          description: Minimum bathrooms
+          required: false
+          schema:
+            type: integer
+        - name: max_bathrooms
+          in: query
+          description: Maximum bathrooms
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Listings retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIResponse"
+        "400":
+          description: Bad request
+
+  /listings/{id}:
+    get:
+      summary: Get listing by ID
+      description: Get a single housing listing by its ID
+      tags:
+        - Listings
+      parameters:
+        - name: id
+          in: path
+          description: Listing ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Listing retrieved successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/APIResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/Listing"
+        "404":
+          description: Listing not found
+
+  /listings/search:
+    get:
+      summary: Search listings
+      description: Search housing listings with query string
+      tags:
+        - Listings
+      parameters:
+        - name: q
+          in: query
+          description: Search query
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          description: Items per page
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        "200":
+          description: Search completed successfully
+        "400":
+          description: Bad request
+
+  /listings/filters:
+    get:
+      summary: Get filter metadata
+      description: Get available filter options and metadata
+      tags:
+        - Listings
+      responses:
+        "200":
+          description: Filter metadata retrieved successfully
+
+  /listings/stats:
+    get:
+      summary: Get listing statistics
+      description: Get statistics about listings (protected route)
+      tags:
+        - Listings
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Statistics retrieved successfully
+        "401":
+          description: Unauthorized
