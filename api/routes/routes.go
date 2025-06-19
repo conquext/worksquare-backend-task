@@ -16,6 +16,16 @@ func Setup(app *fiber.App, cfg *config.Config) {
 	// API prefix
 	api := app.Group(cfg.APIPrefix + "/" + cfg.APIVersion)
 
+	// Initialize controllers
+	listingController, err := controllers.NewListingController()
+	if err != nil {
+		panic("Failed to initialize listing controller: " + err.Error())
+	}
+
+	// Listing routes (public)
+	listingRoutes := api.Group("/listings")
+	listingRoutes.Get("/", listingController.GetListings)
+
 	// Demo endpoints
 	demoRoutes := api.Group("/demo")
 	demoRoutes.Get("/credentials", func(c *fiber.Ctx) error {
