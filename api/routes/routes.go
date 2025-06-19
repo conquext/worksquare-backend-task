@@ -3,6 +3,7 @@ package routes
 import (
 	"housing-api/internal/config"
 	"housing-api/internal/controllers"
+	"housing-api/internal/middleware/auth"
 	"housing-api/internal/middleware/ratelimit"
 
 	"github.com/gofiber/fiber/v2"
@@ -29,6 +30,10 @@ func Setup(app *fiber.App, cfg *config.Config) {
 	authRoutes.Post("/login", authController.Login)
 	authRoutes.Post("/register", authController.Register)
 	authRoutes.Post("/refresh", authController.RefreshToken)
+
+	// Protected auth routes
+	authRoutes.Get("/profile", auth.JWTMiddleware(cfg), authController.GetProfile)
+	authRoutes.Post("/logout", auth.JWTMiddleware(cfg), authController.Logout)
 
 	// Listing routes (public)
 	listingRoutes := api.Group("/listings")

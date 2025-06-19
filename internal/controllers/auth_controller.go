@@ -90,6 +90,19 @@ func (c *AuthController) RefreshToken(ctx *fiber.Ctx) error {
 	return response.Success(ctx, "Token refreshed successfully", authResponse)
 }
 
+func (c *AuthController) GetProfile(ctx *fiber.Ctx) error {
+	// Get user ID from context (set by auth middleware)
+	userID := ctx.Locals("userID").(int)
+
+	// Get user
+	user, err := c.authService.GetUserByID(userID)
+	if err != nil {
+		return response.NotFound(ctx, "User not found", err)
+	}
+
+	return response.Success(ctx, "Profile retrieved successfully", user.ToUserResponse())
+}
+
 func (c *AuthController) Logout(ctx *fiber.Ctx) error {
 	return response.Success(ctx, "Logout successful", map[string]string{
 		"message": "",
