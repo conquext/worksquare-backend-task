@@ -2,6 +2,7 @@ package services
 
 import (
 	"fmt"
+	"strings"
 	"time"
 
 	"housing-api/internal/config"
@@ -46,8 +47,10 @@ func (s *AuthService) createDemoUser() {
 
 // Login authenticates a user and returns JWT tokens
 func (s *AuthService) Login(req models.LoginRequest) (*models.AuthResponse, error) {
+	email := strings.ToLower(strings.TrimSpace(req.Email))
+	
 	// Find user by email
-	user := s.findUserByEmail(req.Email)
+	user := s.findUserByEmail(email)
 	if user == nil {
 		return nil, fmt.Errorf("invalid credentials")
 	}
@@ -78,8 +81,15 @@ func (s *AuthService) Login(req models.LoginRequest) (*models.AuthResponse, erro
 
 // Register creates a new user account
 func (s *AuthService) Register(req models.RegisterRequest) (*models.AuthResponse, error) {
+	email := strings.ToLower(strings.TrimSpace(req.Email))
+	
+	// Check if email is empty
+	if email == "" {
+		return nil, fmt.Errorf("email must not be empty")
+	}
+	
 	// Check if user already exists
-	if s.findUserByEmail(req.Email) != nil {
+	if s.findUserByEmail(email) != nil {
 		return nil, fmt.Errorf("user with email %s already exists", req.Email)
 	}
 
@@ -92,7 +102,7 @@ func (s *AuthService) Register(req models.RegisterRequest) (*models.AuthResponse
 	// Create new user
 	newUser := models.User{
 		ID:        len(s.users) + 1,
-		Email:     req.Email,
+		Email:     email,
 		Password:  hashedPassword,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
@@ -124,7 +134,7 @@ func (s *AuthService) RefreshToken(refreshToken string) (*models.AuthResponse, e
 	// Validate refresh token
 	claims, err := jwt.ValidateToken(refreshToken, s.config.JWTSecret)
 	if err != nil {
-		return nil, fmt.Errorf("invalid refresh token: %w", err)
+		return nil, fmt.Errorf("invalid refresh token")
 	}
 
 	// Find user

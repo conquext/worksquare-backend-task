@@ -25,3 +25,35 @@ deps:
 	@echo "Installing dependencies..."
 	@go mod download
 	@go mod tidy
+
+# Tests
+test:
+	@echo "Running tests..."
+	@go test -v ./...
+
+test-coverage:
+	@echo "Running tests with coverage..."
+	@go test -v -coverprofile=coverage.out ./...
+	@go tool cover -html=coverage.out -o coverage.html
+
+# Swagger
+swagger:
+	@echo "Generating Swagger documentation..."
+	@swag init -g main.go
+
+# Clean
+clean:
+	@echo "Cleaning..."
+	@go clean
+	@rm -f $(BINARY_NAME)
+	@rm -f coverage.out coverage.html
+
+# Linting
+lint:
+	@echo "Running linter..."
+	@golangci-lint run
+
+# Format code
+fmt:
+	@echo "Formatting code..."
+	@go fmt ./...

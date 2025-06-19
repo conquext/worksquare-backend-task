@@ -1,6 +1,8 @@
 package jwt
 
 import (
+	"crypto/rand"
+	"encoding/hex"
 	"fmt"
 	"time"
 
@@ -14,12 +16,20 @@ type Claims struct {
 	jwt.RegisteredClaims
 }
 
+// generateNonce returns a secure random string
+func generateNonce() string {
+	bytes := make([]byte, 16) // 128 bits
+	_, _ = rand.Read(bytes)
+	return hex.EncodeToString(bytes)
+}
+
 // GenerateToken generates a JWT token
 func GenerateToken(userID int, email, secret string, expiry time.Duration) (string, error) {
 	claims := Claims{
 		UserID: userID,
 		Email:  email,
 		RegisteredClaims: jwt.RegisteredClaims{
+			ID:        generateNonce(),
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(expiry)),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
 			NotBefore: jwt.NewNumericDate(time.Now()),
