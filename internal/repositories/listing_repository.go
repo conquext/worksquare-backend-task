@@ -28,7 +28,9 @@ func NewListingRepository() (*ListingRepository, error) {
 		filePath: filePath,
 	}
 
-	repo.loadListings()
+	if err := repo.loadListings(); err != nil {
+		return nil, fmt.Errorf("failed to load listing data: %w", err)
+	}
 
 	return repo, nil
 }

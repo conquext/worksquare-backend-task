@@ -23,7 +23,7 @@ func setupAuthTestEnvironment() *config.Config {
 	os.Setenv("DEMO_USER_PASSWORD", "testunit123")
 
 	// Create test data directory
-	os.MkdirAll("../../testdata", 0755)
+	_ = os.MkdirAll("../../testdata", 0755)
 
 	cfg, _ := config.Load()
 	return cfg
@@ -349,6 +349,7 @@ func TestAuthService_MultipleUsers(t *testing.T) {
 		userIDs = append(userIDs, authResponse.User.ID)
 
 		// Verify each user can login
+		//lint:ignore S1016 Copying fields manually from RegisterRequest to LoginRequest
 		loginReq := models.LoginRequest{
 			Email:    userReq.Email,
 			Password: userReq.Password,
