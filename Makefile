@@ -68,6 +68,7 @@ clean:
 # Linting
 lint:
 	@echo "Running linter..."
+	@which golangci-lint > /dev/null || (echo "Installing golangci-lint..." && go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest)
 	@golangci-lint run
 
 # Format code
