@@ -22,6 +22,14 @@ func Setup(app *fiber.App, cfg *config.Config) {
 		panic("Failed to initialize listing controller: " + err.Error())
 	}
 
+	authController := controllers.NewAuthController(cfg)
+
+	// Auth routes (public)
+	authRoutes := api.Group("/auth")
+	authRoutes.Post("/login", authController.Login)
+	authRoutes.Post("/register", authController.Register)
+	authRoutes.Post("/refresh", authController.RefreshToken)
+
 	// Listing routes (public)
 	listingRoutes := api.Group("/listings")
 	listingRoutes.Get("/", listingController.GetListings)

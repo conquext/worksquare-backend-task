@@ -14,12 +14,21 @@ type Config struct {
 	Port        string
 	Host        string
 
+	// JWT Configuration
+	JWTSecret           string
+	JWTExpiresIn        time.Duration
+	JWTRefreshExpiresIn time.Duration
+
 	// Logging
 	LogLevel string
 
 	// API Configuration
 	APIVersion string
 	APIPrefix  string
+
+	// Demo User Credentials
+	DemoUserEmail    string
+	DemoUserPassword string
 }
 
 func Load() (*Config, error) {
@@ -30,9 +39,14 @@ func Load() (*Config, error) {
 		Environment:          getEnv("NODE_ENV", "development"),
 		Port:                 getEnv("PORT", "3000"),
 		Host:                 getEnv("HOST", "localhost"),
+		JWTSecret:           getEnv("JWT_SECRET", "super-secret-jwt-key"),
+		JWTExpiresIn:        parseDuration(getEnv("JWT_EXPIRES_IN", "24h")),
+		JWTRefreshExpiresIn: parseDuration(getEnv("JWT_REFRESH_EXPIRES_IN", "168h")), // 7 days
 		LogLevel:            getEnv("LOG_LEVEL", "info"),
 		APIVersion:          getEnv("API_VERSION", "v1"),
 		APIPrefix:           getEnv("API_PREFIX", "/api"),
+		DemoUserEmail:       getEnv("DEMO_USER_EMAIL", "demo@worksquare.com"),
+		DemoUserPassword:    getEnv("DEMO_USER_PASSWORD", "demo123456"),
 	}
 
 	return cfg, nil
@@ -45,3 +59,10 @@ func getEnv(key, defaultValue string) string {
 	return defaultValue
 }
 
+func parseDuration(s string) time.Duration {
+	d, err := time.ParseDuration(s)
+	if err != nil {
+		return 0
+	}
+	return d
+}
