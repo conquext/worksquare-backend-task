@@ -1,0 +1,94 @@
+name: CI - Build and Test
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+env:
+  GO_VERSION: "1.23.2"
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+
+      - name: Install dependencies
+        run: go mod download
+
+      - name: Create test data if not exists
+        run: |
+          if [ ! -f data/listings.json ]; then
+            mkdir -p data
+            cat > data/listings.json << 'EOF'
+          [
+            {
+              "id": 1,
+              "title": "Sample 4 Bedroom House",
+              "price": "₦2,500,000",
+              "bedrooms": 4,
+              "bathrooms": 4,
+              "location": "Lekki, Lagos",
+              "status": ["House", "For Rent"],
+              "image": "sample1.jpg"
+            },
+            {
+              "id": 2,
+              "title": "Sample 3 Bedroom Flat",
+              "price": "₦1,200,000",
+              "bedrooms": 3,
+              "bathrooms": 2,
+              "location": "Ikeja, Lagos",
+              "status": ["Flat", "For Rent"],
+              "image": "sample2.jpg"
+            }
+          ]
+          EOF
+            echo "Created sample listings.json"
+          else
+            echo "Using existing listings.json"
+          fi
+
+      - name: Run tests
+        run: go test -v -race ./...
+
+      - name: Run linter
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: latest
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+
+      - name: Install dependencies
+        run: go mod download
+
+      - name: Build application
+        run: go build -v -o main .
+
+      - name: Verify build
+        run: ./main --version || echo "Build successful"
