@@ -36,6 +36,23 @@ test-coverage:
 	@go test -v -coverprofile=coverage.out ./...
 	@go tool cover -html=coverage.out -o coverage.html
 
+# Docker
+docker-build:
+	@echo "Building Docker image..."
+	@docker build -t $(DOCKER_IMAGE) .
+
+docker-run: docker-build
+	@echo "Running Docker container..."
+	@docker run -p 3000:3000 $(DOCKER_IMAGE)
+
+docker-compose:
+	@echo "Starting with Docker Compose..."
+	@docker-compose up -d
+
+docker-compose-down:
+	@echo "Stopping Docker Compose..."
+	@docker-compose down
+
 # Swagger
 swagger:
 	@echo "Generating Swagger documentation..."
